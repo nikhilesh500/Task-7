@@ -7,9 +7,9 @@
         </a>
       </div>
       <div>
-        <a v-for="item in navigation" :key="item.name" :href="item.href" >
+        <RouterLink v-for="item in navigation" :key="item.name" :to="item.href" >
           {{ item.name }}
-        </a>
+        </RouterLink>
       </div>
     </nav>
   </div>
@@ -17,7 +17,7 @@
 <script setup>
 const navigation = [
   {name: "Home", href:'/'},
-  {name: "Team Playing", href:'/team'},
   {name: "Players", href:'/players'},
+  {name: "Team Playing", href:'/team'},
 ]
 </script>
