@@ -15,7 +15,7 @@ export const useTaskStore = defineStore('counter', () => {
   const tasks = ref([
     { id: 1, name: 'Dhoni', role: 'Wicket Keeper', status: true },
     { id: 2, name: 'Nikhil', role: 'All rounder', status: false },
-    { id: 3, name: 'Gill', role: 'Batsmen', status: true },
+    { id: 3, name: 'Gill', role: 'Batsmen', status: false },
     { id: 4, name: 'Kohli', role: 'Batsmen', status: true },
     { id: 5, name: 'Tarun', role: 'All rounder', status: false },
   ]);
@@ -27,6 +27,7 @@ export const useTaskStore = defineStore('counter', () => {
   const selected = computed(() => {
     return tasks.value.filter(task => task.status);
   });
+  
   const selectedCount = computed(() => {
     return tasks.value.reduce((prev, curr) => {
       return prev + (curr.status ? 1 : 0);
@@ -37,15 +38,21 @@ export const useTaskStore = defineStore('counter', () => {
     tasks.value.push(task);
   };
 
+  const playerSelected = (id) => {
+    const taskIndex = tasks.value.findIndex(task => task.id === id);
+    if (taskIndex !== -1) {
+      tasks.value[taskIndex].status = true;
+    }
+  };
+  const playerNotSelected = (id) => {
+    const taskIndex = tasks.value.findIndex(task => task.id === id);
+    if (taskIndex !== -1) {
+      tasks.value[taskIndex].status = false;
+    }
+  };
+
   return {
-    tasks,
-    team,
-    selected,
-    selectedCount,
-    totalCount,
-    addTask,
-    counter,
-    incrementCounter,
-    decrementCounter,
+    tasks, team, selected, selectedCount, totalCount, addTask, playerNotSelected, playerSelected, 
+    counter, incrementCounter, decrementCounter,
   };
 });

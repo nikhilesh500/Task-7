@@ -9,7 +9,7 @@
           <h2>{{ task.name }}</h2>
           <p>{{ task.role }}</p>
           <div class="icons">
-          <a>&#10006;</a>
+          <a @click="changeTaskStatus(task.id)">&#10006;</a>
         </div>
         </div>
       </div>
@@ -22,8 +22,13 @@ import {  useTaskStore } from '../stores/TaskStore.js';
 import { storeToRefs } from 'pinia';
 const taskStore = useTaskStore();
 const { selected } = storeToRefs(taskStore);
+
+const changeTaskStatus = (id) => {
+  taskStore.playerNotSelected(id)
+};
 </script>
 
 <style>
+
 
 </style>

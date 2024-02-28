@@ -1,12 +1,12 @@
 <template>
   <div class="header">
-    <nav>
+    <nav class="flex">
       <div>
-        <a href="/">
-          <h1>India</h1>
-        </a>
+        <RouterLink to="/">
+          <h1>BCCI</h1>
+        </RouterLink>
       </div>
-      <div>
+      <div class="flex gap">
         <RouterLink v-for="item in navigation" :key="item.name" :to="item.href" >
           {{ item.name }}
         </RouterLink>
@@ -21,3 +21,16 @@ const navigation = [
   {name: "Team Playing", href:'/team'},
 ]
 </script>
+<style>
+h1{
+  font-size: 40px;
+  margin: 0px;
+}
+.flex {
+  display: flex;
+  justify-content: space-between;
+}
+.gap {
+  gap: 62px;
+}
+</style>

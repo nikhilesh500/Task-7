@@ -1,8 +1,7 @@
 <template>
   <div>
     <div>
-      <h1>Counted Value</h1>
-      {{ taskStore.counter }}
+      <p>Counted Value = {{ taskStore.counter }}</p>
     </div>
 
     <div>
@@ -14,7 +13,14 @@
           <h2>{{ task.name }}</h2>
           <p>{{ task.role }}</p>
           <div class="icons">
-            <a @click="toSelect">&#10004;</a>
+            <a 
+              v-bind:disabled="task.status" 
+              :style="{ 
+                color: task.status ? 'gray' : 'rgb(1, 156, 218)',
+                background: task.status ? 'none' : '',
+                cursor: task.status? 'default' : 'pointer'
+              }" 
+              @click="changeTaskStatus(task.id) ">&#10004;</a>
           </div>
         </div>
       </div>
@@ -32,6 +38,10 @@ const taskStore = useTaskStore();
 const { tasks } = storeToRefs(taskStore);
 console.log("Tasks from store:", taskStore.tasks);
 
+const changeTaskStatus = (id) => {
+  console.log(id);
+  taskStore.playerSelected(id)
+};
 
 // const selectedTasks = computed(() => taskStore.selected);
 // const props = defineProps({
@@ -44,9 +54,6 @@ console.log("Tasks from store:", taskStore.tasks);
   display: flex;
   align-items: center;
   gap: 20px;
-}
-a:disabled {
-  color: gray;
 }
 
 </style>
